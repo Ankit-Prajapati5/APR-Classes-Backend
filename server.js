@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const demoRoutes = require("./routes/demoRoutes");
 const app = express();
 
-require("dotenv").config();
+
 
 
 app.use(cors());
@@ -17,7 +18,10 @@ app.get("/",(req,res)=>{
 })
 
 mongoose
-.connect(process.env.MONGO_URL)
+.connect(process.env.MONGO_URL,{
+    serverSelectionTimeoutMS: 30000
+})
+
 .then(() =>
     console.log("MongoDB Connected ✅"))
 .catch((err) => console.log(err))
