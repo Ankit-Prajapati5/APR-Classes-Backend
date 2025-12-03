@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const demoRoutes = require("./routes/demoRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api",demoRoutes);
+app.use("/api",adminRoutes);
 
 app.get("/",(req,res)=>{
     res.send("APR Classes Backend Running ✅");
