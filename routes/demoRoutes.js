@@ -14,9 +14,13 @@ router.post("/book-demo",async(req,res)=>{
     }
 })
 
-router.get("/all-demos",verifyToken,async(req,res)=>{
-    const demos = await Demo.find.sort({createdAt: -1});
+router.get("/all-demos", async (req, res) => {
+  try {
+    const demos = await Demo.find().sort({ _id: -1 });
     res.json(demos);
-})
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch demos" });
+  }
+});
 
 module.exports = router;
